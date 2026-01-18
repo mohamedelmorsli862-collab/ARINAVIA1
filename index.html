@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ممكلة اريفانيا</title>
+</head>
+<body>
+    <style>
+      :root {
+            --gold: #d4af37;
+            --mythic: #c0392b;
+            --primary: #bfc7d5; /* فضي بارد */
+            --glass: rgba(255, 255, 255, 0.05);
+            --border: rgba(255, 255, 255, 0.12);
+            --bg-main: #2b2f36;   /* رمادي رصاصي */
+            --bg-dark: #1f2329;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: linear-gradient(180deg, var(--bg-main), var(--bg-dark));
+            color: #eee;
+            min-height: 100vh;
+            overflow-x: hidden;
+              padding-top: 80px;
+        }
+
+        /* خلفية ثابتة هادئة */
+        .universe-bg {
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(circle at 20% 20%, rgba(255,255,255,0.04), transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(255,255,255,0.03), transparent 40%);
+            z-index: -1;
+        }
+
+        /* NAV */
+        .nav-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 6%;
+
+    background: rgba(180, 180, 180, 0.15); /* رمادي خفيف */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+
+        .epic-menu {
+            display: flex;
+            gap: 20px;
+        }
+
+        .menu-item {
+            color: #ddd;
+            text-decoration: none;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .menu-item:hover {
+            color: var(--gold);
+        }
+
+        /* HERO */
+        .hero {
+            height: 55vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background:
+                linear-gradient(rgba(40,45,52,0.75), rgba(20,22,26,0.95)),
+                url('https://images.unsplash.com/photo-1514539079130-25950c84af65?q=80&w=2000')
+                center/cover;
+        }
+
+        .hero h1 {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(2.5rem, 8vw, 4.2rem);
+            text-shadow: 0 0 25px rgba(255,255,255,0.15);
+        }
+
+        /* GRID */
+        .legends-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 50px 6%;
+        }
+
+        /* CARD */
+        .legend-card {
+            position: relative;
+            height: 450px;
+            border-radius: 22px;
+            overflow: hidden;
+            background: var(--glass);
+            border: 1px solid var(--border);
+            transition: 0.5s ease;
+        }
+
+        .legend-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .card-bg-img {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            filter: brightness(0.45) blur(2px);
+            transition: 0.6s;
+        }
+
+        .legend-card:hover .card-bg-img {
+            filter: brightness(0.65) blur(0);
+        }
+
+        .card-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, transparent 20%, rgba(0,0,0,0.9) 90%);
+        }
+
+        .corner-rank {
+            position: absolute;
+            top: 18px;
+            right: 18px;
+            font-size: 12px;
+            padding: 5px 14px;
+            border-radius: 50px;
+            border: 1px solid var(--gold);
+            background: rgba(0,0,0,0.55);
+            z-index: 2;
+        }
+
+        .card-content {
+            position: relative;
+            z-index: 2;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 25px;
+            text-align: right;
+        }
+
+        .role {
+            font-size: 12px;
+            letter-spacing: 2px;
+            color: var(--gold);
+            margin-bottom: 10px;
+        }
+
+        .name {
+            font-size: 2rem;
+            font-weight: 900;
+            margin-bottom: 10px;
+        }
+
+        .tags {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        .tag {
+            font-size: 10px;
+            padding: 4px 12px;
+            border-radius: 6px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid var(--border);
+        }
+
+        .achievements-list {
+            font-size: 12px;
+            color: #ccc;
+            line-height: 1.7;
+            margin-bottom: 15px;
+            max-height: 120px;
+            overflow-y: auto;
+            opacity: 0;
+            transform: translateY(15px);
+            transition: 0.4s;
+        }
+
+        .legend-card:hover .achievements-list {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .like-btn {
+            background: rgba(255,255,255,0.12);
+            border: none;
+            color: #fff;
+            padding: 10px 18px;
+            border-radius: 12px;
+            cursor: pointer;
+            display: flex;
+            gap: 10px;
+            width: fit-content;
+            transition: 0.3s;
+        }
+
+        .like-btn:hover,
+        .like-btn.active {
+            background: #c0392b;
+        }
+
+
+        .regions {
+    padding: 60px 6%;
+    text-align: center;
+}
+
+.regions h1 {
+    font-size: 2.2rem;
+    margin-bottom: 10px;
+    border-bottom: 3px solid var(--gold);
+    display: inline-block;
+    padding-bottom: 6px;
+}
+
+.regions h3 {
+    font-size: 13px;
+    opacity: 0.7;
+    margin-bottom: 40px;
+}
+
+/* GRID */
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 30px;
+}
+
+/* CARD باب طويل */
+.region-card {
+    position: relative;
+    height: 420px; /* طول الباب */
+    border-radius: 22px;
+    overflow: hidden;
+    background: rgba(255,255,255,0.55);
+    border: 1px solid rgba(255,255,255,0.6);
+    box-shadow:
+        0 20px 40px rgba(0,0,0,0.15),
+        inset 0 0 20px rgba(255,215,120,0.15);
+    transition: 0.4s ease;
+}
+
+.region-card:hover {
+    transform: translateY(-10px) scale(1.02);
+}
+
+/* IMG */
+.region-card img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.55);
+    transition: 0.6s ease;
+}
+
+.region-card:hover img {
+    filter: brightness(0.75);
+}
+
+/* Overlay أنمي */
+.region-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to bottom,
+        transparent 30%,
+        rgba(0,0,0,0.85) 100%
+    );
+}
+
+/* TITLE */
+.region-card p {
+    position: absolute;
+    bottom: 25px;
+    width: 100%;
+    text-align: center;
+    font-size: 1.4rem;
+    font-weight: 900;
+    color: #fff;
+    letter-spacing: 2px;
+    text-shadow: 0 0 20px rgba(255,215,120,0.9);
+}
+
+/* LINK */
+.region-card a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+}
+
+.arivania-footer {
+    margin-top: 80px;
+    background: linear-gradient(
+        180deg,
+        rgba(255,255,255,0.7),
+        rgba(200,205,215,0.9)
+    );
+    border-top: 3px solid var(--gold);
+    box-shadow: 0 -10px 30px rgba(0,0,0,0.15);
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 60px 6%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 40px;
+}
+
+.footer-brand h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    text-shadow: 0 0 15px rgba(245,200,106,0.7);
+}
+
+.footer-brand p {
+    font-size: 14px;
+    opacity: 0.75;
+    line-height: 1.7;
+}
+
+.footer-links h3,
+.footer-info h3 {
+    margin-bottom: 15px;
+    color: #111;
+}
+
+.footer-links a {
+    display: block;
+    text-decoration: none;
+    color: #333;
+    margin-bottom: 10px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.footer-links a:hover {
+    color: var(--gold);
+    transform: translateX(6px);
+}
+
+.footer-info p {
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding: 20px;
+    font-size: 12px;
+    opacity: 0.6;
+    border-top: 1px solid rgba(0,0,0,0.1);
+}
+
+.regions {
+    padding: 70px 6%;
+    text-align: center;
+}
+
+.regions h1 {
+    font-size: 2.4rem;
+    margin-bottom: 8px;
+    color: #9efcff;
+    text-shadow: 0 0 15px rgba(0,255,255,0.6);
+}
+
+.regions h3 {
+    font-size: 14px;
+    opacity: 0.75;
+    margin-bottom: 50px;
+}
+
+/* GRID */
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 35px;
+}
+
+/* CARD (شكل الباب) */
+.region-card {
+    position: relative;
+    height: 460px;
+    border-radius: 26px;
+    overflow: hidden;
+    box-shadow:
+        0 25px 45px rgba(0,0,0,0.5),
+        inset 0 0 25px rgba(0,255,255,0.15);
+    transition: 0.5s ease;
+}
+
+.region-card:hover {
+    transform: translateY(-12px) scale(1.03);
+}
+
+/* IMAGE */
+.region-card img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.55);
+    transition: 0.6s ease;
+}
+
+.region-card:hover img {
+    filter: brightness(0.8);
+}
+
+/* OVERLAY */
+.region-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to bottom,
+        rgba(0,0,0,0.1),
+        rgba(0,0,0,0.9)
+    );
+}
+
+/* TEXT */
+.region-text {
+    position: absolute;
+    bottom: 30px;
+    width: 100%;
+    padding: 0 15px;
+    text-align: center;
+    font-size: 1.4rem;
+    font-weight: 900;
+    color: #ffffff;
+    letter-spacing: 2px;
+    text-shadow:
+        0 0 10px rgba(0,255,255,0.8),
+        0 0 25px rgba(0,200,255,0.6);
+}
+
+/* LINK */
+.region-card a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+}
+.intro-arvania {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: radial-gradient(circle at top, #0b1d33, #050b16);
+    padding: 60px 15px;
+}
+
+.arvania-box {
+    max-width: 620px;
+    padding: 45px 35px;
+    border-radius: 28px;
+    background: rgba(10,20,40,0.75);
+    backdrop-filter: blur(14px);
+    box-shadow:
+        0 0 60px rgba(120,180,255,0.25),
+        inset 0 0 30px rgba(0,255,255,0.08);
+    text-align: center;
+    color: #fff;
+}
+
+/* الدعاء */
+.top-dua {
+    background: linear-gradient(135deg, #5b8cff, #9a6bff);
+    padding: 10px 18px;
+    border-radius: 30px;
+    font-size: 14px;
+    display: inline-block;
+    margin-bottom: 25px;
+    box-shadow: 0 0 20px rgba(140,140,255,0.6);
+}
+
+/* عنوان صغير */
+.small-title {
+    color: #7fe7ff;
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+}
+
+/* العنوان الكبير */
+.main-title {
+    font-size: 2.6rem;
+    line-height: 1.3;
+    margin-bottom: 15px;
+    color: #9bdcff;
+}
+
+.main-title span {
+    color: #b88cff;
+}
+
+/* النص التقديمي */
+.intro-text {
+    font-size: 1.1rem;
+    margin-bottom: 25px;
+}
+
+.highlight {
+    color: #7ffcff;
+    font-weight: 900;
+}
+
+/* الفقرات */
+.desc {
+    font-size: 0.95rem;
+    line-height: 1.9;
+    opacity: 0.9;
+    margin-bottom: 18px;
+}
+
+/* الاقتباس */
+.quote {
+    margin-top: 25px;
+    font-style: italic;
+    color: #aabfff;
+    border-top: 1px solid rgba(255,255,255,0.15);
+    padding-top: 15px;
+}
+/* الدعاء */
+.top-dua {
+    background: linear-gradient(
+        135deg,
+        #2b2b2b,
+        #1c1c1c
+    ); /* رمادي غامق */
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-size: 14px;
+    display: inline-block;
+    margin-bottom: 25px;
+
+    color: #ff9f1c; /* برتقالي */
+    font-weight: 700;
+    letter-spacing: 0.5px;
+
+    box-shadow:
+        0 0 18px rgba(255,159,28,0.45),
+        inset 0 0 12px rgba(255,159,28,0.15);
+
+    border: 1px solid rgba(255,159,28,0.4);
+}
+.intro-arvania {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 60px 15px;
+
+    /* الخلفية الرمادي الغامق */
+    background: radial-gradient(
+        circle at top,
+        #2a2a2a,
+        #121212
+    );
+}
+.floating-kingdom {
+  position: fixed;
+  bottom: 22px;
+  right: 22px;
+  padding: 12px 20px;
+  border-radius: 30px;
+
+  background: linear-gradient(145deg, #00f2fe, #1e40af);
+  color: #020617;
+  font-weight: 900;
+  font-size: 13px;
+  letter-spacing: 1px;
+  text-decoration: none;
+
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  box-shadow:
+    0 0 25px rgba(0, 242, 254, 0.45),
+    inset 0 0 10px rgba(255,255,255,0.2);
+
+  border: 1px solid rgba(255,255,255,0.3);
+  z-index: 9999;
+
+  transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Hover effect */
+.floating-kingdom:hover {
+  transform: translateY(-6px) scale(1.05);
+  box-shadow:
+    0 0 35px rgba(0, 242, 254, 0.8),
+    inset 0 0 15px rgba(255,255,255,0.25);
+}
+
+/* Animation خفيفة */
+.floating-kingdom {
+  animation: kingdomPulse 2.5s infinite;
+}
+
+@keyframes kingdomPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.06); }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .floating-kingdom {
+    bottom: 15px;
+    right: 15px;
+    left: auto;
+    transform: none;
+    font-size: 12px;
+    padding: 10px 16px;
+  }
+}
+.developer-badge {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            /* يمكنك تغييرها إلى right إذا أردت */
+            background: rgba(15, 23, 42, 0.6);
+            /* زجاجي داكن */
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 242, 254, 0.2);
+            padding: 8px 15px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 9999;
+            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .developer-badge:hover {
+            transform: translateY(-5px) scale(1.05);
+            border-color: #00f2fe;
+            box-shadow: 0 5px 15px rgba(0, 242, 254, 0.2);
+            background: rgba(15, 23, 42, 0.9);
+        }
+
+        .developer-badge .text {
+            font-family: 'Cinzel', serif;
+            /* أو أي خط تفضله */
+            font-size: 11px;
+            color: #fff;
+            letter-spacing: 1.5px;
+            font-weight: bold;
+        }
+
+        .developer-badge .code-icon {
+            color: #00f2fe;
+            font-weight: 900;
+            font-family: monospace;
+            font-size: 14px;
+            animation: blink 2s infinite;
+        }
+
+
+    </style>
+    <div class="universe-bg"></div>
+
+<nav class="nav-container">
+    <div style="
+    font-weight:900;
+    letter-spacing:2px;
+    color:#111;
+    text-shadow: 0 0 10px rgba(245,200,106,0.6);
+">ARIVANIA 🪽</div>
+    <div class="epic-menu">
+        <a href="#rotab" class="menu-item">الرتب العليا</a>
+        <a href="#a9alim" class="menu-item">اقاليم</a>
+        <a href="./na9aba1.html" class="menu-item">النقابات</a>
+        <a href="./omara2.html" class="menu-item">الأمــراء </a>
+        <a href="./injazat.html" class="menu-item">انجازات</a>
+        <a href="./developer.html" class="menu-item">المطوّر الأعلى</a>
+    </div>
+</nav>
+<header class="hero">
+    <h1>ممكلة  اريفانيا</h1>
+    <p style="opacity:0.7; letter-spacing:2px">WELCOME TO ARIVANIA</p>
+</header>
+<a href="https://chat.whatsapp.com/E8VBcMOac0h9pJ492BSEGS" class="floating-kingdom">
+  صحيفة المملكة🪽
+</a>
+
+<section class="intro-arvania">
+  <div class="arvania-box">
+
+    <div class="top-dua">
+      🤍 اللهم انصر اخواننا في فلسطين وغزة 🧡🍁
+    </div>
+
+    <h4 class="small-title">نخبة المملكة</h4>
+
+    <h1 class="main-title">
+      لنرفرف بجناحاً<br>
+      <span>كل ما طل أشرق</span>
+    </h1>
+
+    <p class="intro-text">
+      أينما تجد جناح الأمل فهنا، تكمن
+      <span class="highlight">𝐀𝐑𝐕𝐀𝐍𝐈𝐀 🪽</span>
+    </p>
+
+    <p class="desc">
+      مملكة أريفانيا تأسست على يد الإمبراطور شادو بتاريخ
+      <b>2025/9/8</b>، وهي من أحدث الممالك ولكنها من أقوى الممالك،
+      فرضت اسمها سريعاً بين الممالك بإنجازاتها ومواقفها الحاسمة،
+      لتصبح أقوى مملكة في عهدها.
+    </p>
+
+    <p class="desc">
+      منذ انطلاقة أريفانيا، لم نسير خلف الطريق بل صنعناه،
+      بعزيمة لا تنكسر وطموح يتجاوز الحدود، لبناء مملكة قوية
+      تفرض حضورها وتصنع الريادة.
+    </p>
+
+    <div class="quote">
+      "ليس المهم طول الطريق، بل قوة من يسير فيه"
+    </div>
+
+  </div>
+</section>
+
+<section class="legends-grid" id="rotab">
+    
+ <h2 style="font-size: 2rem; border-right: 5px solid var(--gold); padding-right: 15px; display: inline-block; text-align: center;">
+            الرتب العليا</h2>
+     <article class="legend-card">
+        <div class="card-bg-img" style="background-image:url('./shado.jfif')"></div>
+        <div class="card-overlay"></div>
+        <div class="corner-rank">LEGEND</div>
+
+        <div class="card-content">
+            <span class="role"> امبراطور </span>
+            <h2 class="name">شادو</h2>
+
+            <div class="tags">
+                <span class="tag">قائد  </span>
+                <span class="tag">خبير </span>
+            </div>
+
+            <div class="achievements-list">
+مؤسس جميع النقابات والمسؤول عن جميع الأشياء الخاصة بالمملكة , و مسؤول جميع النقابات , و هو المسؤول عن انشاء النقابات و فروعها            </div>
+
+            <button class="like-btn" onclick="toggleLike(this,'guts')">
+                ❤️ <span class="count">0</span>
+            </button>
+        </div>
+    </article>
+
+     <article class="legend-card">
+        <div class="card-bg-img" style="background-image:url('./jin.jfif')"></div>
+        <div class="card-overlay"></div>
+        <div class="corner-rank">LEGEND</div>
+
+        <div class="card-content">
+            <span class="role"> نائب الامبراطور </span>
+            <h2 class="name">جين</h2>
+
+            <div class="tags">
+                <span class="tag">ذكي </span>
+                <span class="tag">مساعد  </span>
+            </div>
+
+            <div class="achievements-list">
+المساعد الاول للمؤوس وهو المسؤول الثاني بالمملكة ومسؤول الزيارات الخاصة بالمملكة
+            <button class="like-btn" onclick="toggleLike(this,'guts')">
+                ❤️ <span class="count">0</span>
+            </button>
+        </div>
+    </article>
+
+     <article class="legend-card">
+        <div class="card-bg-img" style="background-image:url('./rojar.jfif')"></div>
+        <div class="card-overlay"></div>
+        <div class="corner-rank">LEGEND</div>
+
+        <div class="card-content">
+            <span class="role"> لورد  </span>
+            <h2 class="name">روجر</h2>
+
+            <div class="tags">
+                <span class="tag">محارب  </span>
+                <span class="tag">مخطط </span>
+            </div>
+
+            <div class="achievements-list">
+المسؤول عن جميع وضع النقابات و قوانين و تنظيم شؤون المملكة
+            <button class="like-btn" onclick="toggleLike(this,'guts')">
+                ❤️ <span class="count">0</span>
+            </button>
+        </div>
+    </article>
+
+     <article class="legend-card">
+        <div class="card-bg-img" style="background-image:url('./hild.jfif')"></div>
+        <div class="card-overlay"></div>
+        <div class="corner-rank">LEGEND</div>
+
+        <div class="card-content">
+            <span class="role"> لوردة الفروع  </span>
+            <h2 class="name">هيلد</h2>
+
+            <div class="tags">
+                <span class="tag">مثابرة </span>
+                <span class="tag">حكيمة  </span>
+            </div>
+
+            <div class="achievements-list">
+المسؤولة عن الفروع بصفة عامة ،فتح فروع وتنظيم الفروع على اكمل وجه
+            <button class="like-btn" onclick="toggleLike(this,'guts')">
+                ❤️ <span class="count">0</span>
+            </button>
+        </div>
+    </article>
+</section>
+<section class="regions" id="a9alim">
+    <h1>أقاليم المملكة</h1>
+    <h3>اضغط على الإقليم لاستعراض المعلومات</h3>
+
+    <div class="cards">
+        <!-- اقليم اكارد -->
+        <div class="region-card">
+            <a href="./modano.html">
+                <img src="./monado.jfif" alt="اقليم اكارد">
+                <div class="region-overlay"></div>
+                <div class="region-text">
+                  🌟اكارد : مورتيس
+                </div>
+            </a>
+        </div>
+
+        <!-- اقليم سونغ -->
+        <div class="region-card">
+            <a href="./irayz.html">
+                <img src="./arriza.jffi.jpeg" alt="اقليم سونغ">
+                <div class="region-overlay"></div>
+                
+                <div class="region-text">
+                  🪶 سونغ : ارايز 
+
+                </div>
+            </a>
+        </div>
+        
+        <div class="region-card">
+            <a href="./modano.html">
+                <img src="./9amar.jfif" alt="الملك دانيال">
+                <div class="region-overlay"></div>
+               <div class="region-text">
+🌙 دانيال : القمر           </div>
+            </a>
+        </div>
+   
+    </div>
+</section>
+<a href="#" class="developer-badge">
+  <span class="text">𝑲𝒂𝒊𝒓𝒐 – 𝑻𝒐𝒋𝒊 ⛧</span>
+  <span class="code-icon">&lt;/&gt;</span>
+</a>
+
+    <footer class="arivania-footer">
+    <div class="footer-container">
+
+        <div class="footer-brand">
+            <h2>ARIVANIA 👑</h2>
+            <p>مملكة أنمي فاخرة، مبنية على النظام، القوة، والولاء.</p>
+        </div>
+
+        <div class="footer-links">
+            <h3>أقسام المملكة</h3>
+            <a href="#rotab">الرتب العليا</a>
+            <a href="omara2.html">الأمراء</a>
+            <a href="injazat.html">الإنجازات</a>
+            <a href="na9aba.html">النقابات</a>
+        </div>
+
+        <div class="footer-info">
+            <h3>معلومات</h3>
+            <p>👑 أفضل مملكة تنظيمًا</p>
+            <p>🏆 نظام صارم وعادل</p>
+            <p>⚔️ مستوحاة من عالم الأنمي</p>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        © 2026 مملكة اريفانيا — جميع الحقوق محفوظة
+    </div>
+</footer>
+
+
+
+<script>
+function toggleLike(btn, id) {
+    let likes = JSON.parse(localStorage.getItem('legend_likes') || '{}');
+    likes[id] = (likes[id] || 0) + 1;
+    localStorage.setItem('legend_likes', JSON.stringify(likes));
+    btn.querySelector('.count').innerText = likes[id];
+    btn.classList.add('active');
+}
+</script>
+
+
+
+</body>
+</html>

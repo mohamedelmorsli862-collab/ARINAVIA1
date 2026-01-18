@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<title>الأمراء | مملكة اريفانيا</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+:root {
+            --gold: #d4af37;
+            --mythic: #c0392b;
+            --primary: #bfc7d5; /* فضي بارد */
+            --glass: rgba(255, 255, 255, 0.05);
+            --border: rgba(255, 255, 255, 0.12);
+            --bg-main: #2b2f36;   /* رمادي رصاصي */
+            --bg-dark: #1f2329;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: linear-gradient(180deg, var(--bg-main), var(--bg-dark));
+            color: #eee;
+            min-height: 100vh;
+            overflow-x: hidden;
+              padding-top: 80px;
+        }
+/* NAV */
+   .nav-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 6%;
+
+    background: rgba(180, 180, 180, 0.15); /* رمادي خفيف */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+
+        .epic-menu {
+            display: flex;
+            gap: 20px;
+        }
+
+        .menu-item {
+            color: #ddd;
+            text-decoration: none;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .menu-item:hover {
+            color: var(--gold);
+        }
+
+/* HEADER */
+.hero{
+    text-align:center;
+    padding:70px 6% 40px;
+    animation:fadeDown 1s ease;
+}
+.hero h1{
+    font-size:2.6rem;
+    text-shadow:0 0 15px rgba(245,200,106,.6);
+}
+.hero p{opacity:.7}
+
+/* GRID */
+.princes{
+    max-width:1200px;
+    margin:auto;
+    padding:40px 6%;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:35px;
+}
+
+/* CARD */
+.prince-card{
+    position:relative;
+    border-radius:22px;
+    overflow:hidden;
+    background:var(--glass);
+    border:1px solid var(--border);
+    box-shadow:0 20px 40px rgba(0,0,0,.15);
+    animation:rise 1s ease forwards;
+    opacity:0;
+}
+
+/* صورة الأمير */
+.prince-card img{
+    width:100%;
+    height:260px;
+    object-fit:cover;
+    filter:brightness(.6);
+}
+
+/* overlay */
+.prince-overlay{
+    position:absolute;
+    inset:0;
+    background:linear-gradient(to bottom,transparent 30%,rgba(0,0,0,.85));
+}
+
+/* content */
+.prince-content{
+    position:absolute;
+    bottom:20px;
+    width:100%;
+    text-align:center;
+    color:#fff;
+}
+.prince-name{
+    font-size:1.9rem;
+    font-weight:900;
+}
+.symbols{
+    margin-top:10px;
+    font-size:1.3rem;
+}
+
+/* ألوان خاصة */
+.obito{box-shadow:0 0 25px rgba(180,0,0,.6)}
+.ozuki{box-shadow:0 0 25px rgba(0,80,160,.6)}
+.inomaki{box-shadow:0 0 25px rgba(120,0,160,.6)}
+
+footer{
+    text-align:center;
+    padding:30px;
+    font-size:12px;
+    opacity:.6;
+}
+
+/* ANIMATIONS */
+@keyframes fadeDown{
+    from{opacity:0;transform:translateY(-40px)}
+    to{opacity:1;transform:translateY(0)}
+}
+@keyframes rise{
+    from{opacity:0;transform:translateY(40px)}
+    to{opacity:1;transform:translateY(0)}
+}
+</style>
+</head>
+
+<body>
+
+<nav class="nav-container">
+    <a href="./index.html" class="menu-item">⬅ الرجوع للمملكة</a>
+    <span>ARIVANIA 👑</span>
+</nav>
+
+<header class="hero">
+    <h1>🤴🏻 الأمــراء ⤹</h1>
+    <p>النخبة العليا داخل مملكة اريفانيا</p>
+</header>
+
+<section class="princes">
+
+<!-- أوبـيتو -->
+<div class="prince-card obito" style="animation-delay:.2s">
+    <img src="./obito.jpg" alt="أوبـيتو">
+    <div class="prince-overlay"></div>
+    <div class="prince-content">
+        <div class="prince-name">أوبـيــتو</div>
+        <div class="symbols">🏴‍☠️ 🌕 🏮 🪶</div>
+    </div>
+</div>
+
+<!-- اوزوڪي -->
+<div class="prince-card ozuki" style="animation-delay:.4s">
+    <img src="./ozuko.jpg" alt="اوزوڪي">
+    <div class="prince-overlay"></div>
+    <div class="prince-content">
+        <div class="prince-name">اوزوڪــي</div>
+        <div class="symbols">🪐 💧 🩸 🦅</div>
+    </div>
+</div>
+
+<!-- اينوماكي -->
+<div class="prince-card inomaki" style="animation-delay:.6s">
+    <img src="./inomaki.jpg" alt="إينوماكي">
+    <div class="prince-overlay"></div>
+    <div class="prince-content">
+        <div class="prince-name">إيـنومــاڪي</div>
+        <div class="symbols">🔮 🌪️ 🌙 🕊️</div>
+    </div>
+</div>
+
+</section>
+
+<footer>© مملكة اريفانيا — قسم الأمراء</footer>
+
+</body>
+</html>
