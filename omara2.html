@@ -41,9 +41,9 @@
     z-index: 999;
 
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    padding: 16px 6%;
+    padding: 14px 6%;
 
     background: rgba(155, 220, 255, 0.85);
     backdrop-filter: blur(12px);
@@ -53,19 +53,108 @@
 }
 
 
-        .epic-menu {
-            display: flex;
-            gap: 20px;
-        }
 
-       .menu-item {
-    color: #0f172a;
-    font-weight: 700;
+
+       .epic-menu {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    justify-content: center;
 }
+
+
+/* الروابط */
+.menu-item {
+    position: relative;
+    padding: 10px 18px;
+
+    background: linear-gradient(135deg, #9bdcff, #5bbcff);
+    color: #0f172a;
+
+    font-size: 13px;
+    font-weight: 800;
+    text-decoration: none;
+    border-radius: 999px;
+
+    box-shadow: 0 6px 16px rgba(91,188,255,0.35);
+    transition: all 0.3s ease;
+}
+
 
 .menu-item:hover {
+    background: linear-gradient(135deg, #5bbcff, #2fa4ff);
     color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 22px rgba(47,164,255,0.5);
 }
+
+
+
+/* خط سفلي أنيق */
+.menu-item::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    width: 0%;
+    height: 2px;
+    background: linear-gradient(90deg, #9bdcff, #5bbcff);
+    transition: 0.3s ease;
+    border-radius: 10px;
+}
+
+
+
+.menu-item:hover::after {
+    width: 100%;
+}
+
+    @media (max-width: 768px) {
+    .menu-item {
+        padding: 9px 14px;
+        font-size: 12px;
+    }
+
+    .epic-menu {
+        gap: 10px;
+    }
+}
+/* دخول الأنمي للـ nav */
+.nav-container {
+    animation: navDrop 0.9s ease forwards;
+    transform: translateY(-40px);
+    opacity: 0;
+}
+
+@keyframes navDrop {
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Animation stagger للأزرار */
+.menu-item {
+    animation: buttonPop 0.6s ease forwards;
+    opacity: 0;
+    transform: scale(0.8);
+}
+
+.menu-item:nth-child(1) { animation-delay: 0.2s; }
+.menu-item:nth-child(2) { animation-delay: 0.3s; }
+.menu-item:nth-child(3) { animation-delay: 0.4s; }
+.menu-item:nth-child(4) { animation-delay: 0.5s; }
+.menu-item:nth-child(5) { animation-delay: 0.6s; }
+.menu-item:nth-child(6) { animation-delay: 0.7s; }
+
+@keyframes buttonPop {
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+    
+        
 
 
 /* HEADER */
@@ -155,14 +244,91 @@ footer{
     from{opacity:0;transform:translateY(40px)}
     to{opacity:1;transform:translateY(0)}
 }
+.theme-toggle {
+    margin-left: 16px;
+    padding: 10px 14px;
+
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+
+    font-size: 16px;
+    background: #ffffff;
+    color: #0f172a;
+
+    box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+    transition: all 0.3s ease;
+}
+
+.theme-toggle:hover {
+    transform: rotate(20deg) scale(1.1);
+}
+/* الوضع النهاري */
+body.light {
+    background: linear-gradient(180deg, #fff9ef, #f6f1e8);
+    color: #111;
+}
+
+/* nav نهار */
+body.light .nav-container {
+    background: rgba(255, 248, 235, 0.9);
+}
+
+/* أزرار نهار */
+body.light .menu-item {
+    background: linear-gradient(135deg, #ffd88a, #ffe8b8);
+    color: #3b2f2f;
+}
+
+/* Footer نهار */
+body.light .footer {
+    background: rgba(255, 248, 235, 0.8);
+}
+body {
+    font-family: 'Cairo', sans-serif;
+    background: linear-gradient(180deg, #0f172a, #020617);
+    color: #e5e7eb;
+    transition: background 0.4s ease, color 0.4s ease;
+}
+body.light {
+    background: linear-gradient(180deg, #fffdf7, #f5f7fa);
+    color: #0f172a;
+}
+.nav-container {
+    background: #0f172a;
+    transition: background 0.4s ease;
+}
+
+body.light .nav-container {
+    background: rgba(255, 255, 255, 0.95);
+}
+section {
+    background: rgba(255,255,255,0.03);
+    transition: background 0.4s ease;
+}
+
+body.light section {
+    background: rgba(255,255,255,0.9);
+}
+.footer {
+    background: rgba(20, 30, 50, 0.7);
+    transition: background 0.4s ease, color 0.4s ease;
+}
+
+body.light .footer {
+    background: rgba(255, 255, 255, 0.95);
+    color: #0f172a;
+}
 </style>
 </head>
 
 <body>
 
 <nav class="nav-container">
+    <button class="theme-toggle" id="themeToggle">🌙</button>
+
     <a href="./index.html" class="menu-item">⬅ الرجوع للمملكة</a>
-    <span>ARIVANIA 👑</span>
+    <a href="./injazat.html" class="menu-item">انجازات</a>
 </nav>
 
 <header class="hero">
@@ -205,6 +371,16 @@ footer{
 </section>
 
 <footer>© مملكة اريفانيا — قسم الأمراء</footer>
+<script>
+    const toggleBtn = document.getElementById("themeToggle");
+
+toggleBtn.addEventListener("click", () => {
+    document.body.classList.toggle("light");
+
+    toggleBtn.textContent =
+        document.body.classList.contains("light") ? "☀️" : "🌙";
+});
+</script>
 
 </body>
 </html>

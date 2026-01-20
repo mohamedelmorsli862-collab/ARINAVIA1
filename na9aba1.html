@@ -71,7 +71,7 @@ body {
     text-align:center;
     margin:60px auto 40px;
     font-size:32px;
-    color:#ddd;
+    color:#151ec7;
     border-right:5px solid var(--gold);
     padding-right:15px;
     width:fit-content;
@@ -190,17 +190,121 @@ body {
             font-size: 14px;
             animation: blink 2s infinite;
         }
+
+        body {
+    animation: pageEnter 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes pageEnter {
+    from {
+        opacity: 0;
+        transform: translateY(40px) scale(0.97);
+        filter: blur(8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+    }
+}
+.card {
+    opacity: 0;
+    transform: translateY(60px) scale(0.9);
+    transition: 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card.show {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+.card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+        circle at top,
+        rgba(255,255,255,0.25),
+        transparent 60%
+    );
+    opacity: 0;
+    transition: 0.5s;
+}
+
+.card:hover::before {
+    opacity: 1;
+}
+
+.mother {
+    animation: pulseGlow 3s infinite;
+}
+
+@keyframes pulseGlow {
+    0% {
+        box-shadow: 0 0 20px rgba(255,215,0,0.3);
+    }
+    50% {
+        box-shadow: 0 0 60px rgba(255,215,0,0.75);
+    }
+    100% {
+        box-shadow: 0 0 20px rgba(255,215,0,0.3);
+    }
+}
+.card {
+    transform-style: preserve-3d;
+}
+
+.card:hover {
+    transform: translateY(-15px) rotateX(6deg) rotateY(-6deg) scale(1.03);
+}
+.main-title {
+    animation: titlePop 1s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes titlePop {
+    from {
+        opacity: 0;
+        transform: scale(0.8) rotateX(20deg);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) rotateX(0);
+    }
+}
+#particles {
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    pointer-events: none;
+}
+.cards {
+    perspective: 1200px;
+}
+@keyframes shake {
+    0% { transform: translateX(0); }
+    20% { transform: translateX(-4px); }
+    40% { transform: translateX(4px); }
+    60% { transform: translateX(-4px); }
+    80% { transform: translateX(4px); }
+    100% { transform: translateX(0); }
+}
+
+.card.shake {
+    animation: shake 0.35s;
+}
+
+
 </style>
 </head>
 
 <body>
+<canvas id="particles"></canvas>
 
 <nav class="nav-container">
     <div style="font-weight:900;">ARIVANIA 🪽</div>
     <a href="./index.html" class="menu-item">رجوع إلى المملكة</a>
 </nav>
 
-<h2 class="main-title">نقابات مستقلة </h2>
+<h2 class="main-title" >نقابات مستقلة </h2>
 
 <div class="cards">
 
@@ -278,6 +382,75 @@ body {
   <span class="text">𝑲𝒂𝒊𝒓𝒐 – 𝑻𝒐𝒋𝒊 ⛧</span>
   <span class="code-icon">&lt;/&gt;</span>
 </a>
+<script>
+    document.querySelectorAll(".card").forEach(card => {
+    card.addEventListener("click", () => {
+        card.classList.add("shake");
+        setTimeout(() => card.classList.remove("shake"), 350);
+    });
+});
+    document.addEventListener("mousemove", e => {
+    const x = (e.clientX / window.innerWidth - 0.5) * 10;
+    const y = (e.clientY / window.innerHeight - 0.5) * -10;
+
+    document.querySelectorAll(".card").forEach(card => {
+        card.style.transform += ` rotateY(${x}deg) rotateX(${y}deg)`;
+    });
+});
+    const canvas = document.getElementById("particles");
+const ctx = canvas.getContext("2d");
+
+function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener("resize", resize);
+
+const particles = [];
+const COUNT = 60;
+
+for (let i = 0; i < COUNT; i++) {
+    particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        r: Math.random() * 2 + 1,
+        dx: (Math.random() - 0.5) * 0.4,
+        dy: (Math.random() - 0.5) * 0.4
+    });
+}
+
+function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "rgba(255,255,255,0.35)";
+
+    particles.forEach(p => {
+        p.x += p.dx;
+        p.y += p.dy;
+
+        if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
+        if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fill();
+    });
+
+    requestAnimationFrame(animate);
+}
+animate();
+const cards = document.querySelectorAll('.card');
+
+const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('show');
+        }
+    });
+}, { threshold: 0.2 });
+
+cards.forEach(card => observer.observe(card));
+</script>
 
 </body>
 </html>
