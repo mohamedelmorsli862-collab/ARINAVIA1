@@ -892,6 +892,96 @@ body.light .footer {
     color: #0f172a;
 }
 
+:root {
+    --gold: #d4af37;                 /* ذهبي ملكي */
+    --gold-glow: rgba(212,175,55,.8);
+
+    --purple-dark: #5b2a86;          /* بنفسجي غامق */
+    --purple-glow: rgba(91,42,134,.7);
+}
+.corner-rank {
+    color: var(--gold);
+    font-weight: 900;
+    letter-spacing: 2px;
+
+    border: 1px solid var(--gold);
+    background: linear-gradient(
+        145deg,
+        rgba(212,175,55,0.25),
+        rgba(0,0,0,0.65)
+    );
+
+    box-shadow:
+        0 0 12px var(--gold-glow),
+        inset 0 0 10px rgba(255,255,255,0.15);
+
+    text-shadow: 0 0 10px var(--gold-glow);
+}
+.name {
+    font-size: 2.2rem;
+    font-weight: 900;
+    color: var(--gold);
+
+    text-shadow:
+        0 0 10px var(--gold-glow),
+        0 0 25px rgba(212,175,55,0.6);
+
+    letter-spacing: 1px;
+}
+.role {
+    font-size: 12px;
+    letter-spacing: 3px;
+    font-weight: 800;
+
+    color: #f3eaff;
+    background: linear-gradient(
+        135deg,
+        var(--purple-dark),
+        #2a0f40
+    );
+
+    padding: 6px 14px;
+    border-radius: 20px;
+    width: fit-content;
+
+    box-shadow:
+        0 0 12px var(--purple-glow),
+        inset 0 0 10px rgba(255,255,255,0.15);
+
+    margin-bottom: 12px;
+}
+.tag {
+    font-size: 10px;
+    padding: 5px 14px;
+    border-radius: 16px;
+
+    color: #f5ecff;
+    background: linear-gradient(
+        135deg,
+        #4b1f6f,
+        #2a0f40
+    );
+
+    border: 1px solid rgba(255,255,255,0.15);
+
+    box-shadow:
+        0 0 8px var(--purple-glow),
+        inset 0 0 8px rgba(255,255,255,0.1);
+
+    transition: 0.3s ease;
+}
+
+.tag:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 0 16px var(--purple-glow);
+}
+.legend-card:hover .name {
+    text-shadow:
+        0 0 15px var(--gold-glow),
+        0 0 35px rgba(212,175,55,0.9);
+}
+
+
     </style>
     <div class="universe-bg"></div>
 
@@ -905,6 +995,7 @@ body.light .footer {
         <a href="./omara2.html" class="menu-item">الأمــراء </a>
         <a href="./injazat.html" class="menu-item">انجازات</a>
         <a href="./tasnifat.html" class="menu-item">تصنيفات</a>
+        <a href="./9awanin.html" class="menu-item">القوانين</a>
         <a href="./developer.html" class="menu-item">المطوّر الأعلى</a>
     </div>
 </nav>

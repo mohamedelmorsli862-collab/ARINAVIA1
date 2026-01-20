@@ -122,12 +122,13 @@ body {
     letter-spacing:2px;
     padding:6px 14px;
 
-    color:var(--white-soft);
-    border:1px solid var(--gold);
+    color:#4c1d95; /* بنفسجي غامق */
+    border:1px solid #6d28d9;
     border-radius:20px;
 
-    background:rgba(0,0,0,0.55);
+    background:rgba(20,10,40,0.75);
     backdrop-filter:blur(6px);
+    box-shadow:0 0 12px rgba(124,58,237,0.6);
     z-index:2;
 }
 
@@ -135,7 +136,23 @@ body {
 .card h3{
     font-size:26px;
     margin-bottom:10px;
+
+    color:#d4af37; /* ذهبي */
+    font-weight:900;
+    text-shadow:
+        0 0 10px rgba(212,175,55,0.6),
+        0 0 20px rgba(212,175,55,0.3);
 }
+.card:hover h3{
+    text-shadow:
+        0 0 15px rgba(255,215,0,0.9),
+        0 0 30px rgba(255,215,0,0.6);
+}
+
+.card:hover .rank{
+    box-shadow:0 0 18px rgba(124,58,237,0.9);
+}
+
 
 .icon{
     font-size:28px;
@@ -309,7 +326,7 @@ body {
 <div class="cards">
 
 <div class="card" style="--bg:url('./sol.jfif')">
-    <span class="rank">ســـول   </span>
+    <span class="rank">بـيـتـو   </span>
     <h3>بـيـتـو</h3>
     <span class="icon">🩸</span>
 </div>
@@ -389,14 +406,14 @@ body {
         setTimeout(() => card.classList.remove("shake"), 350);
     });
 });
-    document.addEventListener("mousemove", e => {
-    const x = (e.clientX / window.innerWidth - 0.5) * 10;
-    const y = (e.clientY / window.innerHeight - 0.5) * -10;
+//     document.addEventListener("mousemove", e => {
+//     const x = (e.clientX / window.innerWidth - 0.5) * 10;
+//     const y = (e.clientY / window.innerHeight - 0.5) * -10;
 
-    document.querySelectorAll(".card").forEach(card => {
-        card.style.transform += ` rotateY(${x}deg) rotateX(${y}deg)`;
-    });
-});
+//     document.querySelectorAll(".card").forEach(card => {
+//         card.style.transform += ` rotateY(${x}deg) rotateX(${y}deg)`;
+//     });
+// });
     const canvas = document.getElementById("particles");
 const ctx = canvas.getContext("2d");
 
