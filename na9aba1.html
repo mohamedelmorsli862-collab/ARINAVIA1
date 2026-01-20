@@ -3,18 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>نقابات اكارد</title>
+<title>نقابات مستقلة</title>
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@600;900&display=swap');
 
-:root{
-    --gold:#d4af37;
-    --glass:rgba(255,255,255,0.06);
-    --border:rgba(255,255,255,0.15);
-    --bg-main:#2b2f36;
-    --bg-dark:#1f2329;
+:root {
+    --main-bg: #9bdcff;   /* اللون لي بغيتي */
+    --white-soft: #ffffff;
+    --border-soft: rgba(0, 0, 0, 0.08);
 }
+
 
 *{
     margin:0;
@@ -22,40 +21,50 @@
     box-sizing:border-box;
 }
 
-body{
-    font-family:'Cairo',sans-serif;
-    background:linear-gradient(180deg,var(--bg-main),var(--bg-dark));
-    color:#eee;
-    min-height:100vh;
-    padding-top:80px;
+body {
+    font-family: 'Cairo', sans-serif;
+    background: linear-gradient(
+        180deg,
+        #bfe9ff,
+        #9bdcff
+    );
+    color: #0f172a;
+    min-height: 100vh;
+    overflow-x: hidden;
+    padding-top: 80px;
 }
+
 
 /* ===== NAV ===== */
-.nav-container{
-    position:fixed;
-    top:0; left:0;
-    width:100%;
-    z-index:999;
+.nav-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999;
 
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:16px 6%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 6%;
 
-    background:rgba(180,180,180,0.15);
-    backdrop-filter:blur(12px);
-    border-bottom:1px solid var(--border);
+    background: rgba(155, 220, 255, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
 }
 
-.menu-item{
-    color:#eee;
-    text-decoration:none;
-    font-weight:bold;
-    transition:0.3s;
+
+.menu-item {
+    color: #0f172a;
+    font-weight: 700;
 }
-.menu-item:hover{
-    color:var(--gold);
+
+.menu-item:hover {
+    color: #ffffff;
 }
+
 
 /* ===== TITLE ===== */
 .main-title{
@@ -113,7 +122,7 @@ body{
     letter-spacing:2px;
     padding:6px 14px;
 
-    color:var(--gold);
+    color:var(--white-soft);
     border:1px solid var(--gold);
     border-radius:20px;
 
@@ -195,49 +204,49 @@ body{
 
 <div class="cards">
 
-<div class="card" style="--bg:url('./shado.jfif')">
+<div class="card" style="--bg:url('./sol.jfif')">
     <span class="rank">ســـول   </span>
     <h3>بـيـتـو</h3>
     <span class="icon">🩸</span>
 </div>
 
-<div class="card" style="--bg:url('./makima.jfif')">
+<div class="card" style="--bg:url('./makima1.jfif')">
     <span class="rank">مـاڪيما</span>
     <h3>رايـــجـيـن  </h3>
     <span class="icon">⚡</span>
 </div>
 
-<div class="card" style="--bg:url('./shado.jfif')">
+<div class="card" style="--bg:url('./shaghr1.jfif')">
     <span class="rank">شـاغر </span>
     <h3>ازوـرا </h3>
     <span class="icon">🔥</span>
 </div>
 
-<div class="card" style="--bg:url('./sokona.jfif')">
+<div class="card" style="--bg:url('./sokona2.jfif')">
     <span class="rank">سـوڪونا</span>
     <h3>فــوتــريڪس </h3>
     <span class="icon">🪐</span>
 </div>
 
-<div class="card" style="--bg:url('./shado.jfif')">
+<div class="card" style="--bg:url('./shaghr2.jfif')">
     <span class="rank">شـاغر  </span>
     <h3>اريــسـا </h3>
     <span class="icon">💧</span>
 </div>
 
-<div class="card" style="--bg:url('./shado.jfif')">
+<div class="card" style="--bg:url('./shaghr3.jfif')">
     <span class="rank">شاغر</span>
     <h3>سيلــينـا  </h3>
     <span class="icon">🌒</span>
 </div>
 
-<div class="card mother" style="--bg:url('./shado.jfif')">
+<div class="card mother" style="--bg:url('./shaghr4.jfif')">
     <span class="rank">شاغر</span>
     <h3>ـونــــا  </h3>
     <span class="icon">🌕</span>
 </div>
 
-<div class="card mother" style="--bg:url('./shado.jfif')">
+<div class="card mother" style="--bg:url('./shaghr5.jfif')">
     <span class="rank">شاغر</span>
     <h3>ون بـيـــس</h3>
     <span class="icon">🏴‍☠️</span>
@@ -252,17 +261,13 @@ body{
     <h3>ديــمـــونـز  </h3>
     <span class="icon">🪦</span>
 </div>
-<div class="card mother" style="--bg:url('./akard.jfif')">
-    <span class="rank">ريــــو</span>
-    <h3>نــايــــت   </h3>
-    <span class="icon">🌑</span>
-</div>
-<div class="card mother" style="--bg:url('./scarlit.jfif')">
+
+<div class="card mother" style="--bg:url('./scarlit1.jfif')">
     <span class="rank">سـڪـارلــيـت</span>
     <h3>اڤـيــــرا  </h3>
     <span class="icon">🪶</span>
 </div>
-<div class="card mother" style="--bg:url('./shado.jfif')">
+<div class="card mother" style="--bg:url('./shaghr6.jfif')">
     <span class="rank">شاغر</span>
     <h3>يــوجـــيـن  </h3>
     <span class="icon">🏮</span>

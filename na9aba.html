@@ -8,12 +8,17 @@
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@600;900&display=swap');
 
-:root{
-    --gold:#d4af37;
-    --glass:rgba(255,255,255,0.06);
-    --border:rgba(255,255,255,0.15);
-    --bg-main:#2b2f36;
-    --bg-dark:#1f2329;
+:root {
+    --gold: #f5c542;        /* ذهبي نجمي */
+    --gold-soft: #ffe9a3;   /* صفر ناعم */
+    --primary: #2b220f;     /* بني غامق للنص */
+
+    --glass: rgba(255, 215, 120, 0.18);
+    --border: rgba(255, 215, 120, 0.35);
+
+    /* خلفية صفراء نجمية */
+    --bg-main: #f7d046;     /* صفر ذهبي */
+    --bg-dark: #c9a227;     /* ذهبي غامق */
 }
 
 *{
@@ -22,39 +27,50 @@
     box-sizing:border-box;
 }
 
-body{
-    font-family:'Cairo',sans-serif;
-    background:linear-gradient(180deg,var(--bg-main),var(--bg-dark));
-    color:#eee;
-    min-height:100vh;
-    padding-top:80px;
+ body {
+    font-family: 'Cairo', sans-serif;
+    background: linear-gradient(
+        180deg,
+        var(--bg-main),
+        var(--bg-dark)
+    );
+    color: #2b220f;
+    min-height: 100vh;
+    overflow-x: hidden;
+    padding-top: 80px;
 }
 
 /* ===== NAV ===== */
-.nav-container{
-    position:fixed;
-    top:0; left:0;
-    width:100%;
-    z-index:999;
+.nav-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999;
 
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:16px 6%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 6%;
 
-    background:rgba(180,180,180,0.15);
-    backdrop-filter:blur(12px);
-    border-bottom:1px solid var(--border);
+    background: rgba(255, 215, 120, 0.45); /* ذهبي شفاف */
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+
+    border-bottom: 1px solid rgba(180, 130, 20, 0.6);
 }
 
-.menu-item{
-    color:#eee;
-    text-decoration:none;
-    font-weight:bold;
-    transition:0.3s;
+    .menu-item {
+    color: #3a2d10;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 700;
+    transition: 0.3s;
 }
-.menu-item:hover{
-    color:var(--gold);
+
+.menu-item:hover {
+    color: #000;
+    text-shadow: 0 0 10px rgba(255,215,120,0.9);
 }
 
 /* ===== TITLE ===== */
@@ -201,7 +217,7 @@ body{
     <span class="icon">🐺</span>
 </div>
 
-<div class="card" style="--bg:url('./madara.jfif')">
+<div class="card" style="--bg:url('./madara1.jfif')">
     <span class="rank">مادارا</span>
     <h3>سينا</h3>
     <span class="icon">❄️</span>
@@ -225,19 +241,19 @@ body{
     <span class="icon">⚜️</span>
 </div>
 
-<div class="card" style="--bg:url('./akard.jfif')">
+<div class="card" style="--bg:url('./shaghr7.jfif')">
     <span class="rank">شاغر</span>
     <h3>كاتسورا</h3>
     <span class="icon">🗡️</span>
 </div>
 
-<div class="card mother" style="--bg:url('./akard.jfif')">
+<div class="card mother" style="--bg:url('./shaghr8.jfif')">
     <span class="rank">شاغر</span>
     <h3>زيوس</h3>
     <span class="icon">🌩️</span>
 </div>
 
-<div class="card mother" style="--bg:url('./akard.jfif')">
+<div class="card mother" style="--bg:url('./shaghr9.jfif')">
     <span class="rank">شاغر</span>
     <h3>إينرا</h3>
     <span class="icon">👑</span>

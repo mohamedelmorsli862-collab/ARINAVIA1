@@ -3,21 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>إقليم ارايز</title>
+    <title>إقليم  قمر</title>
 
     <style>
      :root {
     --gold: #d4af37;
     --mythic: #c0392b;
-    --primary: #d6c7b2; /* فضي مائل للبني */
 
-    --glass: rgba(255, 255, 255, 0.05);
-    --border: rgba(255, 255, 255, 0.12);
+    --primary: #4a463f; /* لون نص غامق ناعم */
 
-    /* بني غامق */
-    --bg-main: #3b2f2f;   /* بني داكن */
-    --bg-dark: #1f1714;   /* بني أسود */
+    --glass: rgba(255, 255, 255, 0.65);
+    --border: rgba(0, 0, 0, 0.08);
+
+    /* أصفر فاتح مائل للأبيض (قمر) */
+    --bg-main: #fff9e6;
+    --bg-dark: #f3ecd4;
 }
+
 
         * {
             margin: 0;
@@ -25,14 +27,14 @@
             box-sizing: border-box;
         }
 
-       body {
+     body {
     font-family: 'Cairo', sans-serif;
     background: linear-gradient(
         180deg,
         var(--bg-main),
         var(--bg-dark)
     );
-    color: #eee;
+    color: var(--primary);
     min-height: 100vh;
     overflow-x: hidden;
     padding-top: 80px;
@@ -40,14 +42,15 @@
 
 
         /* خلفية ثابتة هادئة */
-        .universe-bg {
+       .universe-bg {
     position: fixed;
     inset: 0;
     background:
-        radial-gradient(circle at 25% 25%, rgba(255,215,150,0.06), transparent 40%),
-        radial-gradient(circle at 75% 70%, rgba(120,80,40,0.05), transparent 40%);
+        radial-gradient(circle at 25% 25%, rgba(255,255,255,0.6), transparent 45%),
+        radial-gradient(circle at 70% 70%, rgba(255,235,180,0.4), transparent 45%);
     z-index: -1;
 }
+
 
 
         /* NAV */
@@ -63,26 +66,28 @@
     align-items: center;
     padding: 18px 6%;
 
-    background: rgba(60, 45, 35, 0.65); /* بني زجاجي */
+    background: rgba(255, 252, 235, 0.85);
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
 
-    border-bottom: 1px solid rgba(212,175,55,0.25);
+    border-bottom: 1px solid rgba(212,175,55,0.35);
 }
 
 
 
-        .menu-item {
-    color: #e6d8c3;
+.menu-item {
+    color: #5a5246;
     text-decoration: none;
     font-size: 14px;
+    font-weight: 600;
     transition: 0.3s;
 }
 
 .menu-item:hover {
     color: var(--gold);
-    text-shadow: 0 0 8px rgba(212,175,55,0.6);
+    text-shadow: 0 0 6px rgba(212,175,55,0.5);
 }
+
 
 
         /* HERO */
@@ -94,7 +99,7 @@
             align-items: center;
             text-align: center;
             background:
-                url('./arriza.jffi.jpeg')
+                url('.//9amar.jfif')
                 center/cover;
         }
 
@@ -233,12 +238,13 @@
 
         /* ===== FOOTER ===== */
 .footer {
-    background: rgba(180, 180, 180, 0.12);
+    background: rgba(255, 252, 235, 0.75);
     backdrop-filter: blur(12px);
-    border-top: 1px solid var(--border);
+    border-top: 1px solid rgba(212,175,55,0.25);
     padding: 40px 6% 25px;
     margin-top: 80px;
 }
+
 
 .footer-content {
     display: grid;
@@ -248,18 +254,13 @@
 }
 
 .footer h3 {
-    font-size: 16px;
-    margin-bottom: 12px;
     color: var(--gold);
-    letter-spacing: 1px;
 }
 
 .footer p,
 .footer a {
+    color: #5a5246;
     font-size: 13px;
-    color: #ccc;
-    line-height: 1.8;
-    text-decoration: none;
 }
 
 .footer a:hover {
@@ -271,9 +272,10 @@
     margin-top: 30px;
     padding-top: 15px;
     font-size: 12px;
-    color: #aaa;
-    border-top: 1px solid rgba(255,255,255,0.1);
+    color: #8a8375;
+    border-top: 1px solid rgba(0,0,0,0.08);
 }
+
 
 
 .developer-badge {
@@ -372,18 +374,18 @@
 <div class="universe-bg"></div>
 
 <nav class="nav-container">
-    <div style="font-weight:900; color:var(--primary)">ERAIZ 🪶</div>
+    <div style="font-weight:900; color:var(--primary)">MOON 🌙</div>
     <div class="epic-menu">
         <a href="#rotab" class="menu-item">الرتب الملكية</a>
         <a href="#do9" class="menu-item">الدوقات</a>
-        <a href="./na9aba3.html" class="menu-item">النقابات</a>
+        <a href="./na9aba4.html" class="menu-item">النقابات</a>
         <a href="./index.html" class="menu-item">رجوع إلى المملكة </a>
     </div>
 </nav>
 
 <header class="hero">
-    <h1>إقليم ارايز</h1>
-    <p style="opacity:0.7; letter-spacing:2px">WELCOME TO ERAIZ</p>
+    <h1>إقليم قمر</h1>
+    <p style="opacity:0.7; letter-spacing:2px">WELCOME TO MOON</p>
 </header>
 
     
@@ -392,48 +394,54 @@
  <h2 style="font-size: 2rem; border-right: 5px solid var(--gold); padding-right: 15px; display: inline-block; text-align: center;">
             الرتب الملكية</h2>
      <article class="legend-card">
-        <div class="card-bg-img" style="background-image:url('./sung.jfif')"></div>
+        <div class="card-bg-img" style="background-image:url('./danyal.jfif')"></div>
         <div class="card-overlay"></div>
         <div class="corner-rank">LEGEND</div>
 
         <div class="card-content">
             <h1 class="role"> ملك</h1>
-            <h2 class="name">سونغ</h2>
+            <h2 class="name">دانيال</h2>
 
             <div class="tags">
-                <span class="tag">ذكي </span>
-                <span class="tag">خبير </span>
+                <span class="tag">اداري   </span>
+                <span class="tag">نـاشـر   </span>
             </div>
 
             <div class="achievements-list">
-               اكارد الملك يعد من اهم الأشخاص وشخص قوي جدا اداريا لقد أصبح الملك بعد اعتزال غيتو ويعد الملك الاول في اريفانيا وهو من اقوى ملوك المملكة شخص ذات خبرة قوية لا يربط الصداقة والنقابات ويعد من الأشخاص الذين ساهموا في نهوض الإقليم و مملكة اريفانيا
-            </div>
 
-            <button class="like-btn" onclick="toggleLike(this,'sung')">
+الملك الوحيد اللذي بدا مسيرته بدون مشرفين و هو شخص خبير و افضل الرتب العليا في اريفانيا            </div>
+
+            <button class="like-btn" onclick="toggleLike(this,'danyal')">
                 ❤️ <span class="count">0</span>
             </button>
         </div>
     </article>
 
-     <article class="legend-card">
-        <div class="card-bg-img" style="background-image:url('./mafuyo.jfif')"></div>
+    
+
+    
+
+    <h2 style="font-size: 2rem; border-right: 5px solid var(--gold); padding-right: 15px; display: inline-block; text-align: center;" id="do9">
+             الدوقات</h2>
+
+          <article class="legend-card">
+        <div class="card-bg-img" style="background-image:url('./livai\,jfif.jpeg')"></div>
         <div class="card-overlay"></div>
         <div class="corner-rank">LEGEND</div>
 
         <div class="card-content">
-            <h1 class="role"> نائب ملك</h1>
-            <h2 class="name">مافويو</h2>
+            <h1 class="role"> دوق  </h1>
+            <h2 class="name">ليفاي </h2>
 
             <div class="tags">
                 <span class="tag">خبير  </span>
-                <span class="tag">قوي</span>
+                <span class="tag">اداري </span>
             </div>
 
             <div class="achievements-list">
-                استا نائب الملك والشخص الاول والمسؤول عن الإقليم في حال غياب الملك شخص ذو خبرة كسب خبراته عن طريق الامبراطور شادو ويعد من تلاميذه الأقوياء ويعد من الأشخاص الذين ساهموا في نهوض مملكة اريفانيا
-            </div>
+من الأشخاص اللي ما استسلم وقت كانت نقابته على بعد نقطة من التصفية ف خبرته الواسعة خلاها من اقوى النقابات في الاقليم ف الوقت الذي توقع الكل سقوطها            </div>
 
-            <button class="like-btn" onclick="toggleLike(this,'mafuo')">
+            <button class="like-btn" onclick="toggleLike(this,'livai')">
                 ❤️ <span class="count">0</span>
             </button>
         </div>
@@ -442,210 +450,28 @@
      
 
      <article class="legend-card">
-        <div class="card-bg-img" style="background-image:url('./makima.jfif')"></div>
+        <div class="card-bg-img" style="background-image:url('./jims.jfif')"></div>
         <div class="card-overlay"></div>
         <div class="corner-rank">LEGEND</div>
 
         <div class="card-content">
-            <h1 class="role"> مستشار ملك</h1>
-            <h2 class="name">ماكيما</h2>
+            <h1 class="role"> دوق </h1>
+            <h2 class="name">جيمس لي</h2>
 
             <div class="tags">
                 <span class="tag">قوي </span>
-                <span class="tag">حكيم </span>
+                <span class="tag">اداري  </span>
             </div>
 
             <div class="achievements-list">
                اينيل مستشار الملك شخص ذو خبرة لقد كان معتزلا بعد تفكك مملكة ماستر لكن الآن عاد من جديد ليحطم الساحة ويصنع طريق المجد مجددا
             </div>
 
-            <button class="like-btn" onclick="toggleLike(this,'makima')">
+            <button class="like-btn" onclick="toggleLike(this,'jums')">
                 ❤️ <span class="count">0</span>
             </button>
         </div>
     </article>
-
-    
-
-    <h2 style="font-size: 2rem; border-right: 5px solid var(--gold); padding-right: 15px; display: inline-block; text-align: center;" id="do9">
-             الدوقات</h2>
-
-            <article class="legend-card">
-        <div class="card-bg-img" style="background-image:url('./inomaki.jpg')"></div>
-        <div class="card-overlay"></div>
-        <div class="corner-rank">LEGEND</div>
-
-        <div class="card-content">
-            <h1 class="role">  الدوق </h1>
-            <h2 class="name">اينوماكي</h2>
-
-            <div class="tags">
-                <span class="tag">خبيرة </span>
-                <span class="tag">خبيرة</span>
-            </div>
-
-            <div class="achievements-list">
-نامي دوقة سينا وكاتسورا تعد من الأشخاص ذات الخبرة وتتخذ قراراتها بتفكير جيد وكل شي محسوب وتعد من الشخصيات الفعالة في الاقليم
-            <button class="like-btn" onclick="toggleLike(this,'inomaki')">
-                ❤️ <span class="count">0</span>
-            </button>
-        </div>
-    </article>
-
-     <article class="legend-card">
-        <div class="card-bg-img" style="background-image:url('./shanks.jfif')"></div>
-        <div class="card-overlay"></div>
-        <div class="corner-rank">LEGEND</div>
-
-        <div class="card-content">
-            <h1 class="role"> نائب الدوق </h1>
-            <h2 class="name">شانكس </h2>
-
-            <div class="tags">
-                <span class="tag">ذكي </span>
-                <span class="tag">قوي </span>
-            </div>
-
-            <div class="achievements-list">
-شانكس.نائب اينوماكي من افضل ناشرين واداريين الدوقية            
-
-<button class="like-btn" onclick="toggleLike(this,'shanks')">
-                ❤️ <span class="count">0</span>
-            </button>
-        </div>
-    </article>
-
-    <article class="legend-card">
-        <div class="card-bg-img" style="background-image:url('./kira\,jfif.jpeg')"></div>
-        <div class="card-overlay"></div>
-        <div class="corner-rank">LEGEND</div>
-
-        <div class="card-content">
-            <h1 class="role"> نائب الدوق </h1>
-            <h2 class="name">كيرا </h2>
-
-            <div class="tags">
-                <span class="tag">ذكي </span>
-                <span class="tag">قوي </span>
-            </div>
-
-            <div class="achievements-list">
-كيلوا نائب الدوقة نامي يعد من الأشخاص ذات الخبرة الجيدة ومن افضل ناشرين الإقليم ويعد شخص قوي وخبير وادارته جيدة
-            <button class="like-btn" onclick="toggleLike(this,'kira')">
-                ❤️ <span class="count">0</span>
-            </button>
-        </div>
-    </article>
-     <article class="legend-card">
-        <div class="card-bg-img" style="background-image:url('./kagami.jfif')"></div>
-        <div class="card-overlay"></div>
-        <div class="corner-rank">LEGEND</div>
-
-        <div class="card-content">
-            <h1 class="role"> المستشار  الدوق </h1>
-            <h2 class="name">كاغامي </h2>
-
-            <div class="tags">
-                <span class="tag">ذكي </span>
-                <span class="tag">قوي </span>
-            </div>
-
-            <div class="achievements-list">
-كيلوا نائب الدوقة نامي يعد من الأشخاص ذات الخبرة الجيدة ومن افضل ناشرين الإقليم ويعد شخص قوي وخبير وادارته جيدة
-            <button class="like-btn" onclick="toggleLike(this,'kagami')">
-                ❤️ <span class="count">0</span>
-            </button>
-        </div>
-    </article>
-
-     <article class="legend-card">
-        <div class="card-bg-img" style="background-image:url('./asta1.jfif')"></div>
-        <div class="card-overlay"></div>
-        <div class="corner-rank">LEGEND</div>
-
-        <div class="card-content">
-            <h1 class="role">  الدوق </h1>
-            <h2 class="name">استا </h2>
-
-            <div class="tags">
-                <span class="tag">خبيرة </span>
-                <span class="tag">خبيرة</span>
-            </div>
-
-            <div class="achievements-list">
-ستا دوق مانجي وجودين شخص ذو خبرة لقد كان معتزلا بعد تفكك مملكة ماستر لكن الان عاد من جديد ليحطم الساحة ويعتزل مجددا      
-      <button class="like-btn" onclick="toggleLike(this,'asta')">
-                ❤️ <span class="count">0</span>
-            </button>
-        </div>
-    </article>
-
-     <article class="legend-card">
-        <div class="card-bg-img" style="background-image:url('./nagumo.jfif')"></div>
-        <div class="card-overlay"></div>
-        <div class="corner-rank">LEGEND</div>
-
-        <div class="card-content">
-            <h1 class="role"> مستشار الدوق </h1>
-            <h2 class="name">ناغومو</h2>
-
-            <div class="tags">
-                <span class="tag">ذكي </span>
-                <span class="tag">قوي </span>
-            </div>
-
-            <div class="achievements-list">
-كيلوا نائب الدوقة نامي يعد من الأشخاص ذات الخبرة الجيدة ومن افضل ناشرين الإقليم ويعد شخص قوي وخبير وادارته جيدة
-            <button class="like-btn" onclick="toggleLike(this,'nagumo')">
-                ❤️ <span class="count">0</span>
-            </button>
-        </div>
-    </article>
-
-    <article class="legend-card">
-        <div class="card-bg-img" style="background-image:url('./gio.jfif')"></div>
-        <div class="card-overlay"></div>
-        <div class="corner-rank">LEGEND</div>
-
-        <div class="card-content">
-            <h1 class="role">  الدوق </h1>
-            <h2 class="name">سيمو </h2>
-
-            <div class="tags">
-                <span class="tag">ذكي </span>
-                <span class="tag">قوي </span>
-            </div>
-
-            <div class="achievements-list">
-دوق متواضع اتكلم بالأفعال و مب بالأقوال لكن اقسم اني بخلي نقاباتي تسمع ف المملكة كاملة      
-      <button class="like-btn" onclick="toggleLike(this,'gio')">
-                ❤️ <span class="count">0</span>
-            </button>
-        </div>
-    </article>
-
-    <article class="legend-card">
-        <div class="card-bg-img" style="background-image:url('./yoji.jfif')"></div>
-        <div class="card-overlay"></div>
-        <div class="corner-rank">LEGEND</div>
-
-        <div class="card-content">
-            <h1 class="role"> نائب الدوق </h1>
-            <h2 class="name">يوجي</h2>
-
-            <div class="tags">
-                <span class="tag">ذكي </span>
-                <span class="tag">قوي </span>
-            </div>
-
-            <div class="achievements-list">
-كيلوا نائب الدوقة نامي يعد من الأشخاص ذات الخبرة الجيدة ومن افضل ناشرين الإقليم ويعد شخص قوي وخبير وادارته جيدة
-            <button class="like-btn" onclick="toggleLike(this,'yoji')">
-                ❤️ <span class="count">0</span>
-            </button>
-        </div>
-    </article>
-
    
 </section>
 
@@ -658,7 +484,7 @@
     <div class="footer-content">
 
         <div>
-            <h3>إقليم ارايز</h3>
+            <h3>إقليم قمر</h3>
             <p>
                 إقليم أسطوري يجمع بين القوة، الحكمة، والتنظيم.
                 بُني على الولاء، الإدارة، وصناعة المجد.
@@ -669,7 +495,7 @@
             <h3>التنقّل</h3>
             <a href="#rotab">الرتب الملكية</a><br>
             <a href="#do9">الدوقات</a><br>
-            <a href="./na9aba3.html">النقابات</a><br>
+            <a href="./na9aba4.html">النقابات</a><br>
         <a href="./index.html">رجوع إلى المملكة </a>
         </div>
 
@@ -683,7 +509,7 @@
     </div>
 
     <div class="footer-bottom">
-        © 2026 — ERAIZ | All Rights Reserved
+        © 2026 — MOON | All Rights Reserved
     </div>
 </footer>
 

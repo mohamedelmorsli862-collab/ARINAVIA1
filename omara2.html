@@ -7,14 +7,11 @@
 
 <style>
 :root {
-            --gold: #d4af37;
-            --mythic: #c0392b;
-            --primary: #bfc7d5; /* فضي بارد */
-            --glass: rgba(255, 255, 255, 0.05);
-            --border: rgba(255, 255, 255, 0.12);
-            --bg-main: #2b2f36;   /* رمادي رصاصي */
-            --bg-dark: #1f2329;
-        }
+    --main-bg: #9bdcff;   /* اللون لي بغيتي */
+    --white-soft: #ffffff;
+    --border-soft: rgba(0, 0, 0, 0.08);
+}
+
 
         * {
             margin: 0;
@@ -23,15 +20,20 @@
         }
 
         body {
-            font-family: 'Cairo', sans-serif;
-            background: linear-gradient(180deg, var(--bg-main), var(--bg-dark));
-            color: #eee;
-            min-height: 100vh;
-            overflow-x: hidden;
-              padding-top: 80px;
-        }
+    font-family: 'Cairo', sans-serif;
+    background: linear-gradient(
+        180deg,
+        #bfe9ff,
+        #9bdcff
+    );
+    color: #0f172a;
+    min-height: 100vh;
+    overflow-x: hidden;
+    padding-top: 80px;
+}
+
 /* NAV */
-   .nav-container {
+  .nav-container {
     position: fixed;
     top: 0;
     left: 0;
@@ -41,13 +43,13 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 18px 6%;
+    padding: 16px 6%;
 
-    background: rgba(180, 180, 180, 0.15); /* رمادي خفيف */
+    background: rgba(155, 220, 255, 0.85);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
 
-    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
 }
 
 
@@ -56,16 +58,15 @@
             gap: 20px;
         }
 
-        .menu-item {
-            color: #ddd;
-            text-decoration: none;
-            font-size: 14px;
-            transition: 0.3s;
-        }
+       .menu-item {
+    color: #0f172a;
+    font-weight: 700;
+}
 
-        .menu-item:hover {
-            color: var(--gold);
-        }
+.menu-item:hover {
+    color: #ffffff;
+}
+
 
 /* HEADER */
 .hero{
