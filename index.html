@@ -980,6 +980,30 @@ body.light .footer {
         0 0 15px var(--gold-glow),
         0 0 35px rgba(212,175,55,0.9);
 }
+/* ألوان فخمة لكل رتبة */
+.legend-card.emperor { --shadow-color: #c0392b; }        /* أحمر قوي للإمبراطور */
+.legend-card.vice-emperor { --shadow-color: #2980b9; }   /* أزرق ملكي للنائب */
+.legend-card.lord { --shadow-color: #0d0d0d; }         /* أسود داكن للورد */
+.legend-card.branch-lord { --shadow-color: #7b3f00; }   /* بني داكن للورد فروع */
+
+/* الكارد العادي */
+.legend-card {
+    position: relative;
+    border-radius: 22px;
+    overflow: hidden;
+    background: rgba(0,0,0,0.35);  /* زجاجي خفيف */
+    border: 1px solid rgba(255,255,255,0.1);
+    box-shadow: 0 0 20px var(--shadow-color); /* ظل غامق حسب الرتبة */
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+/* تأثير عند النقر */
+.legend-card.active {
+    box-shadow: 0 0 40px 8px var(--shadow-color); /* الظل يصبح أقوى وفخم */
+    transform: translateY(-6px); /* رفع خفيف يعطي تأثير ديناميكي */
+}
+
 
 
     </style>
@@ -1049,7 +1073,7 @@ body.light .footer {
 <section class="legends-grid" id="rotab">
     
 
-     <article class="legend-card">
+     <article class="legend-card emperor">
         <div class="card-bg-img" style="background-image:url('./shado.jfif')"></div>
         <div class="card-overlay"></div>
         <div class="corner-rank">LEGEND</div>
@@ -1072,7 +1096,7 @@ body.light .footer {
         </div>
     </article>
 
-     <article class="legend-card">
+     <article class="legend-card vice-emperor">
         <div class="card-bg-img" style="background-image:url('./jin.jfif')"></div>
         <div class="card-overlay"></div>
         <div class="corner-rank">LEGEND</div>
@@ -1094,7 +1118,7 @@ body.light .footer {
         </div>
     </article>
 
-     <article class="legend-card">
+     <article class="legend-card lord">>
         <div class="card-bg-img" style="background-image:url('./rojar.jfif')"></div>
         <div class="card-overlay"></div>
         <div class="corner-rank">LEGEND</div>
@@ -1116,7 +1140,7 @@ body.light .footer {
         </div>
     </article>
 
-     <article class="legend-card">
+     <article class="legend-card branch-lord">
         <div class="card-bg-img" style="background-image:url('./hild.jfif')"></div>
         <div class="card-overlay"></div>
         <div class="corner-rank">LEGEND</div>
@@ -1231,6 +1255,14 @@ function toggleLike(btn, id) {
     btn.querySelector('.count').innerText = likes[id];
     btn.classList.add('active');
 }
+const cards = document.querySelectorAll('.legend-card');
+
+cards.forEach(card => {
+    card.addEventListener('click', () => {
+        card.classList.toggle('active'); // يبدل حالة النقر
+    });
+});
+
 </script>
 
 
