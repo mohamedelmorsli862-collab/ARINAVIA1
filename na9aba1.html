@@ -308,6 +308,29 @@ body {
 .card.shake {
     animation: shake 0.35s;
 }
+.falling-icons {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* الرموز ما تتأثر بالنقر */
+    z-index: -1; /* تبقى تحت كل المحتوى */
+    overflow: hidden;
+}
+.falling-icons span {
+    position: absolute;
+    font-size: 18px;
+    opacity: 0.6;
+    animation: fall linear infinite;
+}
+
+/* keyframes لسقوط الرموز */
+@keyframes fall {
+    0% { transform: translateY(-50px) rotate(0deg); opacity: 0; }
+    10% { opacity: 1; }
+    100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+}
 
 
 </style>
@@ -395,6 +418,7 @@ body {
 </div>
 
 </div>
+  <div class="falling-icons" id="fallingIcons"></div>
 <a href="#" class="developer-badge">
   <span class="text">𝑲𝒂𝒊𝒓𝒐 – 𝑻𝒐𝒋𝒊 ⛧</span>
   <span class="code-icon">&lt;/&gt;</span>
@@ -467,6 +491,21 @@ const observer = new IntersectionObserver(entries => {
 }, { threshold: 0.2 });
 
 cards.forEach(card => observer.observe(card));
+
+const icons = ["♦️","🌙","🌿","🥀","🪷","⚡","🌪️","❄️","🔥","🌤️","🌟","🪐","🌒","🍁","🪶","🦅","⛈️","🌩️","🪦","🔰","🌫️","🩸","👑","⚫","⚜️","🎭","🎋","🔮","🗡️","💧","🎻","🌕","🏴‍☠️","🐍","🔆","🏮","🕊️"];
+
+const container = document.getElementById("fallingIcons");
+const count = 40; // عدد الرموز المتساقطة
+
+for(let i = 0; i < count; i++){
+    const icon = document.createElement("span");
+    icon.textContent = icons[Math.floor(Math.random() * icons.length)];
+    icon.style.left = Math.random() * 100 + "vw"; // موقع عشوائي أفقي
+    icon.style.animationDuration = (Math.random() * 5 + 5) + "s"; // سرعة عشوائية
+    icon.style.fontSize = (Math.random() * 24 + 14) + "px"; // حجم عشوائي
+    container.appendChild(icon);
+}
+
 </script>
 
 </body>
