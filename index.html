@@ -1098,6 +1098,106 @@ body.light .footer {
         transform: translateX(25%) scale(0.85);
     }
 }
+/* ===== CINEMATIC EFFECT ===== */
+
+/* الكاردات */
+.slider .legend-card {
+    filter: blur(3px) brightness(0.6);
+    transform: scale(0.82) translateX(0);
+    opacity: 0.35;
+    transition:
+        transform 1s cubic-bezier(.19,1,.22,1),
+        opacity 1s ease,
+        filter 1s ease,
+        box-shadow 1s ease;
+}
+
+/* الكارتة الرئيسية */
+.slider .legend-card.active {
+    filter: blur(0) brightness(1);
+    transform: scale(1);
+    opacity: 1;
+    box-shadow:
+        0 0 40px var(--shadow-color),
+        0 0 80px rgba(255,255,255,0.15);
+    z-index: 10;
+}
+
+/* الجانبين */
+.slider .legend-card.prev {
+    transform: translateX(-45%) scale(0.78);
+    opacity: 0.5;
+}
+
+.slider .legend-card.next {
+    transform: translateX(45%) scale(0.78);
+    opacity: 0.5;
+}
+
+/* ===== DOTS ===== */
+.slider-dots {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 25px;
+}
+
+.slider-dots span {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.3);
+    cursor: pointer;
+    transition: 0.4s ease;
+}
+
+.slider-dots span.active {
+    background: var(--gold);
+    box-shadow: 0 0 15px var(--gold-glow);
+    transform: scale(1.4);
+}
+
+/* 📱 هاتف */
+@media (max-width: 768px) {
+    .slider .legend-card.prev {
+        transform: translateX(-25%) scale(0.85);
+    }
+    .slider .legend-card.next {
+        transform: translateX(25%) scale(0.85);
+    }
+}
+/* ===== FIX DOTS POSITION ===== */
+.slider {
+    position: relative;
+    flex-direction: column; /* باش كلشي يترتب عمودياً */
+}
+
+/* dots تحت السلايدر */
+.slider-dots {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin-top: 30px;   /* هادي اللي كتنزلهم لتحت */
+    width: 100%;
+}
+
+/* الدوتس */
+.slider-dots span {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.3);
+    cursor: pointer;
+    transition: 0.4s ease;
+}
+
+.slider-dots span.active {
+    background: var(--gold);
+    box-shadow: 0 0 15px var(--gold-glow);
+    transform: scale(1.4);
+}
 
 
 
@@ -1258,6 +1358,8 @@ body.light .footer {
     </article>
     <button class="slider-btn prev">‹</button>
 <button class="slider-btn next">›</button>
+<div class="slider-dots"></div>
+
 </section>
 
 
@@ -1480,6 +1582,76 @@ document.addEventListener("DOMContentLoaded", () => {
         if (diff < -50) current = (current - 1 + cards.length) % cards.length;
 
         updateCards();
+        resetAuto();
+    });
+
+});
+document.addEventListener("DOMContentLoaded", () => {
+
+    const cards = document.querySelectorAll(".slider .legend-card");
+    const dotsContainer = document.querySelector(".slider-dots");
+    let current = 0;
+    let startX = 0;
+
+    // إنشاء الدوتس
+    cards.forEach((_, i) => {
+        const dot = document.createElement("span");
+        dot.addEventListener("click", () => {
+            current = i;
+            updateSlider();
+            resetAuto();
+        });
+        dotsContainer.appendChild(dot);
+    });
+
+    const dots = dotsContainer.querySelectorAll("span");
+
+    function updateSlider() {
+        cards.forEach(card => {
+            card.classList.remove("active", "prev", "next");
+        });
+        dots.forEach(dot => dot.classList.remove("active"));
+
+        cards[current].classList.add("active");
+        dots[current].classList.add("active");
+
+        const prev = (current - 1 + cards.length) % cards.length;
+        const next = (current + 1) % cards.length;
+
+        cards[prev].classList.add("prev");
+        cards[next].classList.add("next");
+    }
+
+    updateSlider();
+
+    // ⏱️ Auto
+    let auto = setInterval(nextSlide, 4500);
+
+    function nextSlide() {
+        current = (current + 1) % cards.length;
+        updateSlider();
+    }
+
+    function resetAuto() {
+        clearInterval(auto);
+        auto = setInterval(nextSlide, 4500);
+    }
+
+    // 📱 Swipe
+    const slider = document.querySelector(".slider");
+
+    slider.addEventListener("touchstart", e => {
+        startX = e.touches[0].clientX;
+    });
+
+    slider.addEventListener("touchend", e => {
+        let endX = e.changedTouches[0].clientX;
+        let diff = startX - endX;
+
+        if (diff > 50) current = (current + 1) % cards.length;
+        if (diff < -50) current = (current - 1 + cards.length) % cards.length;
+
+        updateSlider();
         resetAuto();
     });
 
