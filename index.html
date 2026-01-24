@@ -1090,7 +1090,7 @@ body.light .footer {
             <div class="achievements-list">
 مؤسس جميع النقابات والمسؤول عن جميع الأشياء الخاصة بالمملكة , و مسؤول جميع النقابات , و هو المسؤول عن انشاء النقابات و فروعها            </div>
 
-            <button class="like-btn" onclick="toggleLike(this,'shado')">
+           <button class="like-btn" onclick="toggleLike(this,'shadow')">
                 ❤️ <span class="count">0</span>
             </button>
         </div>
@@ -1112,7 +1112,7 @@ body.light .footer {
 
             <div class="achievements-list">
 المساعد الاول للمؤوس وهو المسؤول الثاني بالمملكة ومسؤول الزيارات الخاصة بالمملكة
-            <button class="like-btn" onclick="toggleLike(this,'jin')">
+          <button class="like-btn" onclick="toggleLike(this,'jin')">
                 ❤️ <span class="count">0</span>
             </button>
         </div>
@@ -1134,7 +1134,7 @@ body.light .footer {
 
             <div class="achievements-list">
 المسؤول عن جميع وضع النقابات و قوانين و تنظيم شؤون المملكة
-            <button class="like-btn" onclick="toggleLike(this,'rojar')">
+            <button class="like-btn" onclick="toggleLike(this,' rojar')">
                 ❤️ <span class="count">0</span>
             </button>
         </div>
@@ -1156,7 +1156,7 @@ body.light .footer {
 
             <div class="achievements-list">
 المسؤولة عن الفروع بصفة عامة ،فتح فروع وتنظيم الفروع على اكمل وجه
-            <button class="like-btn" onclick="toggleLike(this,'mild')">
+            <button class="like-btn" onclick="toggleLike(this,'hild')">
                 ❤️ <span class="count">0</span>
             </button>
         </div>
@@ -1255,14 +1255,6 @@ function toggleLike(btn, id) {
     btn.querySelector('.count').innerText = likes[id];
     btn.classList.add('active');
 }
-const cards = document.querySelectorAll('.legend-card');
-
-cards.forEach(card => {
-    card.addEventListener('click', () => {
-        card.classList.toggle('active'); // يبدل حالة النقر
-    });
-});
-
 </script>
 
 
