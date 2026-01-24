@@ -269,32 +269,7 @@
             text-align: right;
         }
 
-        .role {
-            font-size: 12px;
-            letter-spacing: 2px;
-            color: var(--gold);
-            margin-bottom: 10px;
-        }
-
-        .name {
-            font-size: 2rem;
-            font-weight: 900;
-            margin-bottom: 10px;
-        }
-
-        .tags {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 15px;
-        }
-
-        .tag {
-            font-size: 10px;
-            padding: 4px 12px;
-            border-radius: 6px;
-            background: rgba(255,255,255,0.1);
-            border: 1px solid var(--border);
-        }
+        
 
         .achievements-list {
             font-size: 12px;
@@ -1003,6 +978,126 @@ body.light .footer {
     box-shadow: 0 0 40px 8px var(--shadow-color); /* الظل يصبح أقوى وفخم */
     transform: translateY(-6px); /* رفع خفيف يعطي تأثير ديناميكي */
 }
+/* ===== SLIDER ADDITION ===== */
+.slider {
+    position: relative;
+}
+
+.slider .legend-card {
+    display: none;
+    animation: fade 1s ease;
+}
+
+.slider .legend-card.active {
+    display: block;
+}
+
+@keyframes fade {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+/* ===== SLIDER CONTROLS ===== */
+.slider {
+    position: relative;
+}
+
+/* الكاردات */
+.slider .legend-card {
+    display: none;
+    transform: translateX(60px) scale(0.95);
+    opacity: 0;
+    transition: 
+        transform 0.8s ease,
+        opacity 0.8s ease;
+}
+
+.slider .legend-card.active {
+    display: block;
+    transform: translateX(0) scale(1);
+    opacity: 1;
+}
+
+/* أزرار */
+.slider-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0,0,0,0.6);
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    font-size: 32px;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10;
+    box-shadow: 0 0 15px var(--gold-glow);
+}
+
+.slider-btn.prev { left: 10px; }
+.slider-btn.next { right: 10px; }
+
+.slider-btn:hover {
+    background: var(--gold);
+    color: black;
+}
+/* ===== CAROUSEL PREVIEW EFFECT ===== */
+.slider {
+    display: flex;
+    gap: 30px;
+    overflow: hidden;
+    justify-content: center;
+    align-items: center;
+}
+
+/* جميع الكاردات */
+.slider .legend-card {
+    flex: 0 0 70%;
+    max-width: 70%;
+    opacity: 0.4;
+    transform: scale(0.85);
+    transition: 
+        transform 0.7s ease,
+        opacity 0.7s ease;
+}
+
+/* الكارتة اللي فالنص */
+.slider .legend-card.active {
+    opacity: 1;
+    transform: scale(1);
+    z-index: 5;
+}
+
+/* اللي على اليسار */
+.slider .legend-card.prev {
+    transform: translateX(-40%) scale(0.8);
+    opacity: 0.5;
+}
+
+/* اللي على اليمين */
+.slider .legend-card.next {
+    transform: translateX(40%) scale(0.8);
+    opacity: 0.5;
+}
+
+/* 📱 الهاتف */
+@media (max-width: 768px) {
+    .slider .legend-card {
+        flex: 0 0 90%;
+        max-width: 90%;
+    }
+
+    .slider .legend-card.prev,
+    .slider .legend-card.next {
+        transform: translateX(25%) scale(0.85);
+    }
+}
 
 
 
@@ -1070,7 +1165,7 @@ body.light .footer {
   </div>
 </section>
 
-<section class="legends-grid" id="rotab">
+<section class="legends-grid slider" id="rotab">
     
 
      <article class="legend-card emperor">
@@ -1161,7 +1256,11 @@ body.light .footer {
             </button>
         </div>
     </article>
+    <button class="slider-btn prev">‹</button>
+<button class="slider-btn next">›</button>
 </section>
+
+
 <section class="regions" id="a9alim">
     <h1 style="font-size: 2rem; border-right: 5px solid var(--gold); padding-right: 15px; display: inline-block; color: #1e40af;">أقاليم المملكة</h1>
     <h3>اضغط على الإقليم لاستعراض المعلومات</h3>
@@ -1255,6 +1354,136 @@ function toggleLike(btn, id) {
     btn.querySelector('.count').innerText = likes[id];
     btn.classList.add('active');
 }
+ document.addEventListener("DOMContentLoaded", () => {
+
+    const cards = document.querySelectorAll(".slider .legend-card");
+    const nextBtn = document.querySelector(".slider-btn.next");
+    const prevBtn = document.querySelector(".slider-btn.prev");
+    const slider = document.querySelector(".slider");
+
+    if (!cards.length) return;
+
+    let current = 0;
+    let startX = 0;
+
+    // عرض أول كارتة
+    cards[current].classList.add("active");
+
+    function showCard(index) {
+        cards[current].classList.remove("active");
+        current = (index + cards.length) % cards.length;
+        cards[current].classList.add("active");
+    }
+
+    // ⏱️ Auto slide
+    let autoSlide = setInterval(() => {
+        showCard(current + 1);
+    }, 4000);
+
+    function resetAuto() {
+        clearInterval(autoSlide);
+        autoSlide = setInterval(() => {
+            showCard(current + 1);
+        }, 4000);
+    }
+
+    // ⬅️ ➡️ Buttons (نتأكدو موجودين)
+    if (nextBtn && prevBtn) {
+        nextBtn.addEventListener("click", () => {
+            showCard(current + 1);
+            resetAuto();
+        });
+
+        prevBtn.addEventListener("click", () => {
+            showCard(current - 1);
+            resetAuto();
+        });
+    }
+
+    // 📱 Swipe
+    slider.addEventListener("touchstart", e => {
+        startX = e.touches[0].clientX;
+    });
+
+    slider.addEventListener("touchend", e => {
+        let endX = e.changedTouches[0].clientX;
+        let diff = startX - endX;
+
+        if (diff > 50) showCard(current + 1);
+        if (diff < -50) showCard(current - 1);
+
+        resetAuto();
+    });
+
+});
+document.addEventListener("DOMContentLoaded", () => {
+
+    const cards = document.querySelectorAll(".slider .legend-card");
+    let current = 0;
+
+    function updateCards() {
+        cards.forEach(card => {
+            card.classList.remove("active", "prev", "next");
+        });
+
+        cards[current].classList.add("active");
+
+        const prevIndex = (current - 1 + cards.length) % cards.length;
+        const nextIndex = (current + 1) % cards.length;
+
+        cards[prevIndex].classList.add("prev");
+        cards[nextIndex].classList.add("next");
+    }
+
+    updateCards();
+
+    // ⏱️ Auto slide
+    let auto = setInterval(() => {
+        current = (current + 1) % cards.length;
+        updateCards();
+    }, 4000);
+
+    function resetAuto() {
+        clearInterval(auto);
+        auto = setInterval(() => {
+            current = (current + 1) % cards.length;
+            updateCards();
+        }, 4000);
+    }
+
+    // ⬅️ ➡️ أزرار
+    document.querySelector(".slider-btn.next")?.addEventListener("click", () => {
+        current = (current + 1) % cards.length;
+        updateCards();
+        resetAuto();
+    });
+
+    document.querySelector(".slider-btn.prev")?.addEventListener("click", () => {
+        current = (current - 1 + cards.length) % cards.length;
+        updateCards();
+        resetAuto();
+    });
+
+    // 📱 Swipe
+    let startX = 0;
+    const slider = document.querySelector(".slider");
+
+    slider.addEventListener("touchstart", e => {
+        startX = e.touches[0].clientX;
+    });
+
+    slider.addEventListener("touchend", e => {
+        let endX = e.changedTouches[0].clientX;
+        let diff = startX - endX;
+
+        if (diff > 50) current = (current + 1) % cards.length;
+        if (diff < -50) current = (current - 1 + cards.length) % cards.length;
+
+        updateCards();
+        resetAuto();
+    });
+
+});
 </script>
 
 
