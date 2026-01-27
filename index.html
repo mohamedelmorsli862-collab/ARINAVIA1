@@ -1233,28 +1233,7 @@ body.light .footer {
   cursor: pointer;
 }
 
-@media (max-width: 768px) {
-  .menu-toggle {
-    display: block;
-  }
 
-  .epic-menu {
-    position: fixed;
-    top: 70px;
-    left: 0;
-    width: 100%;
-    background: rgba(10,20,40,0.95);
-    flex-direction: column;
-    gap: 12px;
-    padding: 20px;
-    transform: translateY(-120%);
-    transition: 0.4s ease;
-  }
-
-  .epic-menu.open {
-    transform: translateY(0);
-  }
-}
 body {
   animation: worldBreath 8s infinite alternate;
 }
@@ -1515,10 +1494,8 @@ body {
 
 <nav class="nav-container">
   <button class="theme-toggle" id="themeToggle">🌙</button>
-  <button class="menu-toggle" id="menuToggle">☰</button>
 
-  <div class="epic-menu" id="mobileMenu">
-    <!-- نفس الروابط ديالك -->
+  <div class="epic-menu" >
         <a href="#rotab" class="menu-item">الرتب العليا</a>
         <a href="#a9alim" class="menu-item">اقاليم</a>
         <a href="./na9aba1.html" class="menu-item">النقابات</a>
